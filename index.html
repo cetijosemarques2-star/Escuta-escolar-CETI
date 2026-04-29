@@ -2,7 +2,11 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Ouvidoria CETI José Marques</title>
+<title>Ouvidoria CETI</title>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
 
 <style>
 body {
@@ -14,20 +18,17 @@ body {
 header {
   background: linear-gradient(90deg, #2e7d32, #4a148c);
   color: white;
-  padding: 20px;
   text-align: center;
+  padding: 20px;
 }
 
 header img {
   width: 90px;
-  display: block;
-  margin: 0 auto 10px;
 }
 
 nav {
   background: #2e7d32;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -37,11 +38,6 @@ nav button {
   color: white;
   padding: 15px;
   cursor: pointer;
-  font-weight: bold;
-}
-
-nav button:hover {
-  background: #4a148c;
 }
 
 .section {
@@ -56,36 +52,27 @@ nav button:hover {
 .card {
   background: white;
   padding: 20px;
-  margin: 15px auto;
-  max-width: 650px;
-  border-radius: 12px;
-  box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
-}
-
-h2 {
-  color: #2e7d32;
-}
-
-button.enviar {
-  background: #4a148c;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 6px;
-  cursor: pointer;
+  margin: auto;
+  max-width: 600px;
+  border-radius: 10px;
 }
 
 textarea {
   width: 100%;
   height: 80px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  padding: 5px;
+}
+
+.chat-box {
+  height: 300px;
+  overflow-y: scroll;
+  background: #eee;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 </style>
 
 <script>
-function mostrar(secao) {
+function abrir(secao) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(secao).classList.add('active');
 }
@@ -96,111 +83,121 @@ function mostrar(secao) {
 <body>
 
 <header>
-  <img src="logo.png" alt="Logo da escola">
+  <img src="logo.png">
   <h1>Ouvidoria Estudantil</h1>
   <p>CETI José Marques</p>
 </header>
 
 <nav>
-  <button onclick="mostrar('inicio')">Início</button>
-  <button onclick="mostrar('opiniao')">Opiniões</button>
-  <button onclick="mostrar('infra')">Infraestrutura</button>
-  <button onclick="mostrar('alimentacao')">Alimentação</button>
-  <button onclick="mostrar('limpeza')">Limpeza</button>
-  <button onclick="mostrar('ensino')">Ensino</button>
-  <button onclick="mostrar('sugestoes')">Sugestões</button>
-  <button onclick="mostrar('mural')">Mural</button>
+  <button onclick="abrir('inicio')">Início</button>
+  <button onclick="abrir('formulario')">Questionário</button>
+  <button onclick="abrir('chat')">Chat</button>
+  <button onclick="abrir('mural')">Mural</button>
 </nav>
 
 <!-- INÍCIO -->
 <div id="inicio" class="section active">
   <div class="card">
-    <h2>Bem-vindo!</h2>
-    <p>Seu espaço para ser ouvido. Ajude a melhorar nossa escola.</p>
+    <h2>Bem-vindo</h2>
+    <p>Ajude a melhorar a escola com sua opinião.</p>
   </div>
 </div>
 
-<!-- OPINIÕES -->
-<div id="opiniao" class="section">
+<!-- FORMULÁRIO -->
+<div id="formulario" class="section">
   <div class="card">
-    <h2>Opiniões</h2>
+    <h2>Questionário</h2>
+
     <p>Você gosta da escola?</p>
-    <input type="radio"> Sim
-    <input type="radio"> Mais ou menos
-    <input type="radio"> Não
+    <input type="radio" name="q1"> Sim
+    <input type="radio" name="q1"> Não
 
-    <p>Comentário:</p>
-    <textarea></textarea><br><br>
-    <button class="enviar">Enviar</button>
-  </div>
-</div>
+    <p>Os banheiros estão bons?</p>
+    <input type="radio" name="q2"> Sim
+    <input type="radio" name="q2"> Não
 
-<!-- INFRA -->
-<div id="infra" class="section">
-  <div class="card">
-    <h2>Infraestrutura</h2>
-    <p>Os banheiros estão em boas condições?</p>
-    <input type="radio"> Sim
-    <input type="radio"> Não
-    <input type="radio"> Às vezes
-  </div>
-</div>
-
-<!-- ALIMENTAÇÃO -->
-<div id="alimentacao" class="section">
-  <div class="card">
-    <h2>Alimentação</h2>
     <p>Você gosta da merenda?</p>
-    <input type="radio"> Sim
-    <input type="radio"> Não
+    <input type="radio" name="q3"> Sim
+    <input type="radio" name="q3"> Não
 
-    <p>Sugestão:</p>
-    <textarea></textarea>
-  </div>
-</div>
-
-<!-- LIMPEZA -->
-<div id="limpeza" class="section">
-  <div class="card">
-    <h2>Limpeza</h2>
     <p>A escola é limpa?</p>
-    <input type="radio"> Sim
-    <input type="radio"> Não
-    <input type="radio"> Às vezes
-  </div>
-</div>
+    <input type="radio" name="q4"> Sim
+    <input type="radio" name="q4"> Não
 
-<!-- ENSINO -->
-<div id="ensino" class="section">
-  <div class="card">
-    <h2>Ensino</h2>
     <p>Os professores explicam bem?</p>
-    <input type="radio"> Sim
-    <input type="radio"> Não
+    <input type="radio" name="q5"> Sim
+    <input type="radio" name="q5"> Não
 
-    <p>Comentário:</p>
-    <textarea></textarea>
+    <p>Comentário geral:</p>
+    <textarea id="comentario"></textarea>
+
+    <br><br>
+    <button onclick="enviar()">Enviar</button>
   </div>
 </div>
 
-<!-- SUGESTÕES -->
-<div id="sugestoes" class="section">
+<!-- CHAT -->
+<div id="chat" class="section">
   <div class="card">
-    <h2>Sugestões</h2>
-    <textarea placeholder="Escreva sua sugestão..."></textarea><br><br>
-    <button class="enviar">Enviar</button>
+    <h2>Chat dos Alunos</h2>
+
+    <div class="chat-box" id="chatBox"></div>
+
+    <input type="text" id="msg" placeholder="Digite sua mensagem">
+    <button onclick="enviarMsg()">Enviar</button>
   </div>
 </div>
 
 <!-- MURAL -->
 <div id="mural" class="section">
   <div class="card">
-    <h2>Mural de Divulgação</h2>
-    <p>🏅 Olimpíada Escolar – 10/06</p>
-    <p>📅 Gincana Estudantil – Em breve</p>
-    <p>📚 Projeto de Leitura</p>
+    <h2>Mural</h2>
+    <p>🏅 Olimpíada Escolar</p>
+    <p>📅 Gincana em breve</p>
   </div>
 </div>
+
+<script>
+// 🔥 COLE AQUI SUA CONFIG DO FIREBASE
+const firebaseConfig = {
+  // sua config aqui
+};
+
+// Inicializar
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Enviar formulário
+function enviar() {
+  db.collection("respostas").add({
+    comentario: document.getElementById("comentario").value
+  });
+  alert("Enviado!");
+}
+
+// Enviar mensagem chat
+function enviarMsg() {
+  const msg = document.getElementById("msg").value;
+
+  db.collection("chat").add({
+    texto: msg,
+    data: new Date()
+  });
+
+  document.getElementById("msg").value = "";
+}
+
+// Atualizar chat em tempo real
+db.collection("chat").orderBy("data")
+.onSnapshot(snapshot => {
+  const chatBox = document.getElementById("chatBox");
+  chatBox.innerHTML = "";
+
+  snapshot.forEach(doc => {
+    chatBox.innerHTML += "<p>" + doc.data().texto + "</p>";
+  });
+});
+</script>
 
 </body>
 </html>
