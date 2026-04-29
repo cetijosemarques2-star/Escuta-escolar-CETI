@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>CETI José Marques</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <img src="logo.png" class="logo">
+  <h1>CETI José Marques</h1>
+</header>
+
+<nav>
+  <a href="index.html">Início</a>
+  <a href="questionario.html">Questionário</a>
+  <a href="opiniao.html">Opiniões</a>
+  <a href="mural.html">Mural</a>
+</nav>
+
+<main>
+  <h2>Bem-vindo!</h2>
+  <p>
+    Este site foi criado para avaliar e informar sobre a escola CETI José Marques.
+    Aqui você pode responder questionários, dar sua opinião e acompanhar informações importantes.
+  </p>
+</main>
+
+</body>
+</html>
+<form action="https://formsubmit.co/Cetijosemarques2@gmail.com" method="POST">
+
+<h3>Escola:</h3>
+<select name="Escola">
+<option>Boa</option>
+<option>Mais ou menos</option>
+<option>Ruim</option>
+</select>
+
+<h3>Comida:</h3>
+<select name="Comida">
+<option>Boa</option>
+<option>Mais ou menos</option>
+<option>Ruim</option>
+</select>
+
+<h3>Infraestrutura:</h3>
+<select name="Infraestrutura">
+<option>Boa</option>
+<option>Mais ou menos</option>
+<option>Ruim</option>
+</select>
+
+<h3>Ensino:</h3>
+<select name="Ensino">
+<option>Bom</option>
+<option>Mais ou menos</option>
+<option>Ruim</option>
+</select>
+
+<h3>Limpeza:</h3>
+<select name="Limpeza">
+<option>Boa</option>
+<option>Mais ou menos</option>
+<option>Ruim</option>
+</select>
+
+<br><br>
+<button type="submit" class="botao">Enviar</button>
+
+</form>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Opiniões</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<img src="logo.png" class="logo">
+<h1>Opiniões</h1>
+</header>
+
+<nav>
+<a href="index.html">Início</a>
+<a href="questionario.html">Questionário</a>
+<a href="opiniao.html">Opiniões</a>
+<a href="mural.html">Mural</a>
+</nav>
+
+<main>
+
+<form action="https://formsubmit.co/Cetijosemarques2@gmail.com" method="POST">
+
+<h3>Deixe sua opinião:</h3>
+<textarea name="Opiniao" rows="5" cols="40" placeholder="Escreva aqui..."></textarea>
+
+<br><br>
+<button type="submit" class="botao">Enviar Opinião</button>
+
+</form>
+
+</main>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Mural</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<img src="logo.png" class="logo">
+<h1>Mural de Informações</h1>
+</header>
+
+<nav>
+<a href="index.html">Início</a>
+<a href="questionario.html">Questionário</a>
+<a href="opiniao.html">Opiniões</a>
+<a href="mural.html">Mural</a>
+</nav>
+
+<main>
+
+<h2>🏅 Olimpíadas Escolares</h2>
+<p>
+As olimpíadas acontecerão em breve! Prepare-se para participar das competições esportivas.
+</p>
+
+<h2>📅 Cronograma</h2>
+<ul>
+<li>Segunda: Aulas normais</li>
+<li>Terça: Prova de matemática</li>
+<li>Quarta: Evento esportivo</li>
+<li>Sexta: Apresentações</li>
+</ul>
+
+</main>
+
+</body>
+</html>
+
