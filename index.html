@@ -4,53 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CETI José Marques</title>
+<title>Escuta Escolar - CETI</title>
 
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f4f6f9;
+  background: #f0f4ff;
 }
 
 header {
-  background: #003366;
+  background: #0b3d91;
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 25px;
 }
 
-header img {
-  width: 80px;
+header h1 {
+  margin: 0;
+  font-size: 26px;
 }
 
 .container {
+  max-width: 500px;
+  margin: auto;
   padding: 15px;
-}
-
-h2 {
-  color: #003366;
 }
 
 .card {
   background: white;
-  padding: 15px;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 15px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-button {
-  background: #0077cc;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100%;
-  font-size: 16px;
+h2 {
+  color: #0b3d91;
+  margin-bottom: 10px;
 }
 
-input, textarea {
+p {
+  color: #333;
+}
+
+input, textarea, select {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
@@ -59,18 +57,28 @@ input, textarea {
   border: 1px solid #ccc;
 }
 
-.mural p {
-  background: #e9f1ff;
-  padding: 10px;
-  border-radius: 8px;
-  margin: 5px 0;
+button {
+  width: 100%;
+  padding: 12px;
+  background: #0b3d91;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-/* RESPONSIVO */
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 20px;
-  }
+/* opiniões */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #e6ecff;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 8px;
 }
 </style>
 </head>
@@ -78,38 +86,40 @@ input, textarea {
 <body>
 
 <header>
-  <img src="logo.png" alt="Logo">
-  <h1>CETI José Marques</h1>
-  <p>Escuta Escolar</p>
+  <h1>📢 Escuta Escolar</h1>
+  <p>CETI José Marques</p>
 </header>
 
 <div class="container">
 
-  <!-- QUESTIONÁRIO -->
   <div class="card">
-    <h2>📋 Questionário Escolar</h2>
+    <h2>📌 Sobre</h2>
+    <p>
+      Este é um espaço para você dar sua opinião, fazer sugestões ou relatar problemas na escola.
+      Sua participação ajuda a melhorar o ambiente escolar.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>📋 Enviar Relato</h2>
 
     <form>
-      <p>Como você avalia a estrutura da escola?</p>
-      <label><input type="radio" name="estrutura"> Boa</label><br>
-      <label><input type="radio" name="estrutura"> Regular</label><br>
-      <label><input type="radio" name="estrutura"> Ruim</label>
+      <label>Tipo:</label>
+      <select>
+        <option>Sugestão</option>
+        <option>Reclamação</option>
+        <option>Elogio</option>
+      </select>
 
-      <p>Os professores explicam bem?</p>
-      <label><input type="radio" name="prof"> Sim</label><br>
-      <label><input type="radio" name="prof"> Mais ou menos</label><br>
-      <label><input type="radio" name="prof"> Não</label>
-
-      <p>Sugestões:</p>
+      <label>Mensagem:</label>
       <textarea placeholder="Escreva aqui..."></textarea>
 
       <button type="submit">Enviar</button>
     </form>
   </div>
 
-  <!-- OPINIÕES -->
   <div class="card">
-    <h2>💬 Opiniões dos Alunos</h2>
+    <h2>💬 Opiniões</h2>
 
     <input type="text" id="opiniao" placeholder="Digite sua opinião">
     <button onclick="adicionarOpiniao()">Enviar</button>
@@ -117,15 +127,12 @@ input, textarea {
     <ul id="lista"></ul>
   </div>
 
-  <!-- MURAL -->
   <div class="card">
-    <h2>📢 Mural da Escola</h2>
+    <h2>📢 Mural</h2>
 
-    <div class="mural">
-      <p>📅 Prova de matemática sexta-feira</p>
-      <p>🎉 Gincana escolar semana que vem</p>
-      <p>📢 Reunião com alunos do grêmio</p>
-    </div>
+    <p>📅 Prova sexta-feira</p>
+    <p>🎉 Gincana em breve</p>
+    <p>📢 Reunião do grêmio</p>
   </div>
 
 </div>
