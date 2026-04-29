@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Escuta Escolar - CETI</title>
+<title>Ouvidoria Escolar</title>
 
 <style>
 body {
@@ -13,22 +13,60 @@ body {
   background: #f0f4ff;
 }
 
+/* HEADER */
 header {
   background: #0b3d91;
   color: white;
   text-align: center;
-  padding: 25px;
+  padding: 20px;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 26px;
+header img {
+  width: 70px;
+  margin-bottom: 10px;
 }
 
+/* MENU */
+nav {
+  display: flex;
+  justify-content: center;
+  background: #072c6b;
+}
+
+nav button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+nav button:hover {
+  background: #0b3d91;
+}
+
+nav button.active {
+  background: white;
+  color: #0b3d91;
+  font-weight: bold;
+  border-radius: 10px 10px 0 0;
+}
+
+/* CONTEÚDO */
 .container {
   max-width: 500px;
   margin: auto;
   padding: 15px;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
 }
 
 .card {
@@ -39,15 +77,7 @@ header h1 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-h2 {
-  color: #0b3d91;
-  margin-bottom: 10px;
-}
-
-p {
-  color: #333;
-}
-
+/* FORM */
 input, textarea, select {
   width: 100%;
   padding: 10px;
@@ -57,7 +87,7 @@ input, textarea, select {
   border: 1px solid #ccc;
 }
 
-button {
+button.enviar {
   width: 100%;
   padding: 12px;
   background: #0b3d91;
@@ -65,10 +95,10 @@ button {
   border: none;
   border-radius: 10px;
   font-size: 16px;
-  font-weight: bold;
+  cursor: pointer;
 }
 
-/* opiniões */
+/* OPINIÕES */
 ul {
   list-style: none;
   padding: 0;
@@ -86,71 +116,90 @@ li {
 <body>
 
 <header>
-  <h1>📢 Escuta Escolar</h1>
+  <img src="logo.png" alt="Logo da escola">
+  <h1>📢 Ouvidoria Escolar</h1>
   <p>CETI José Marques</p>
 </header>
 
+<nav>
+  <button class="active" onclick="mostrar('inicio', this)">Início</button>
+  <button onclick="mostrar('formulario', this)">Formulário</button>
+  <button onclick="mostrar('opiniao', this)">Opiniões</button>
+  <button onclick="mostrar('mural', this)">Mural</button>
+</nav>
+
 <div class="container">
 
-  <div class="card">
-    <h2>📌 Sobre</h2>
-    <p>
-      Este é um espaço para você dar sua opinião, fazer sugestões ou relatar problemas na escola.
-      Sua participação ajuda a melhorar o ambiente escolar.
-    </p>
+  <!-- INÍCIO -->
+  <div id="inicio" class="section active">
+    <div class="card">
+      <h2>Bem-vindo</h2>
+      <p>Este espaço foi criado para ouvir os alunos. Aqui você pode dar sugestões, críticas e ajudar a melhorar a escola.</p>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>📋 Enviar Relato</h2>
+  <!-- FORMULÁRIO -->
+  <div id="formulario" class="section">
+    <div class="card">
+      <h2>Enviar Relato</h2>
 
-    <form>
-      <label>Tipo:</label>
-      <select>
-        <option>Sugestão</option>
-        <option>Reclamação</option>
-        <option>Elogio</option>
-      </select>
+      <form>
+        <select>
+          <option>Sugestão</option>
+          <option>Reclamação</option>
+          <option>Elogio</option>
+        </select>
 
-      <label>Mensagem:</label>
-      <textarea placeholder="Escreva aqui..."></textarea>
+        <textarea placeholder="Escreva aqui..."></textarea>
 
-      <button type="submit">Enviar</button>
-    </form>
+        <button class="enviar">Enviar</button>
+      </form>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>💬 Opiniões</h2>
+  <!-- OPINIÕES -->
+  <div id="opiniao" class="section">
+    <div class="card">
+      <h2>Opiniões</h2>
 
-    <input type="text" id="opiniao" placeholder="Digite sua opinião">
-    <button onclick="adicionarOpiniao()">Enviar</button>
+      <input type="text" id="texto" placeholder="Digite sua opinião">
+      <button class="enviar" onclick="add()">Enviar</button>
 
-    <ul id="lista"></ul>
+      <ul id="lista"></ul>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>📢 Mural</h2>
-
-    <p>📅 Prova sexta-feira</p>
-    <p>🎉 Gincana em breve</p>
-    <p>📢 Reunião do grêmio</p>
+  <!-- MURAL -->
+  <div id="mural" class="section">
+    <div class="card">
+      <h2>Mural</h2>
+      <p>📅 Prova sexta</p>
+      <p>🎉 Evento escolar</p>
+      <p>📢 Reunião do grêmio</p>
+    </div>
   </div>
 
 </div>
 
 <script>
-function adicionarOpiniao() {
-  let texto = document.getElementById("opiniao").value;
+function mostrar(secao, botao) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.getElementById(secao).classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+  botao.classList.add("active");
+}
+
+function add() {
+  let texto = document.getElementById("texto").value;
 
   if (texto === "") return;
 
-  let lista = document.getElementById("lista");
+  let li = document.createElement("li");
+  li.textContent = texto;
 
-  let item = document.createElement("li");
-  item.textContent = texto;
-
-  lista.appendChild(item);
-
-  document.getElementById("opiniao").value = "";
+  document.getElementById("lista").appendChild(li);
+  document.getElementById("texto").value = "";
 }
 </script>
 
