@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #f0f0f0;
+  text-align: center;
+}
+
+header {
+  background: linear-gradient(90deg, green, purple);
+  color: white;
+  padding: 20px;
+}
+
+.logo {
+  width: 90px;
+}
+
+nav {
+  background: #222;
+  padding: 10px;
+}
+
+nav a {
+  color: white;
+  margin: 10px;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+}
+
+.botao {
+  background: green;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+}
