@@ -1,31 +1,151 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>CETI José Marques</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CETI José Marques</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+}
+
+header {
+  background: #003366;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+header img {
+  width: 80px;
+}
+
+.container {
+  padding: 15px;
+}
+
+h2 {
+  color: #003366;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+button {
+  background: #0077cc;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 16px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.mural p {
+  background: #e9f1ff;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 5px 0;
+}
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 20px;
+  }
+}
+</style>
 </head>
+
 <body>
 
 <header>
-  <img src="logo.png" class="logo">
+  <img src="logo.png" alt="Logo">
   <h1>CETI José Marques</h1>
+  <p>Escuta Escolar</p>
 </header>
 
-<nav>
-  <a href="index.html">Início</a>
-  <a href="questionario.html">Questionário</a>
-  <a href="opiniao.html">Opiniões</a>
-  <a href="mural.html">Mural</a>
-</nav>
+<div class="container">
 
-<main>
-  <h2>Bem-vindo!</h2>
-  <p>
-    Este site foi criado para avaliar e informar sobre a escola CETI José Marques.
-    Aqui você pode responder questionários, dar sua opinião e acompanhar informações importantes.
-  </p>
-</main>
+  <!-- QUESTIONÁRIO -->
+  <div class="card">
+    <h2>📋 Questionário Escolar</h2>
+
+    <form>
+      <p>Como você avalia a estrutura da escola?</p>
+      <label><input type="radio" name="estrutura"> Boa</label><br>
+      <label><input type="radio" name="estrutura"> Regular</label><br>
+      <label><input type="radio" name="estrutura"> Ruim</label>
+
+      <p>Os professores explicam bem?</p>
+      <label><input type="radio" name="prof"> Sim</label><br>
+      <label><input type="radio" name="prof"> Mais ou menos</label><br>
+      <label><input type="radio" name="prof"> Não</label>
+
+      <p>Sugestões:</p>
+      <textarea placeholder="Escreva aqui..."></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <!-- OPINIÕES -->
+  <div class="card">
+    <h2>💬 Opiniões dos Alunos</h2>
+
+    <input type="text" id="opiniao" placeholder="Digite sua opinião">
+    <button onclick="adicionarOpiniao()">Enviar</button>
+
+    <ul id="lista"></ul>
+  </div>
+
+  <!-- MURAL -->
+  <div class="card">
+    <h2>📢 Mural da Escola</h2>
+
+    <div class="mural">
+      <p>📅 Prova de matemática sexta-feira</p>
+      <p>🎉 Gincana escolar semana que vem</p>
+      <p>📢 Reunião com alunos do grêmio</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function adicionarOpiniao() {
+  let texto = document.getElementById("opiniao").value;
+
+  if (texto === "") return;
+
+  let lista = document.getElementById("lista");
+
+  let item = document.createElement("li");
+  item.textContent = texto;
+
+  lista.appendChild(item);
+
+  document.getElementById("opiniao").value = "";
+}
+</script>
 
 </body>
 </html>
