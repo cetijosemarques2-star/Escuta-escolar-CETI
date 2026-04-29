@@ -1,36 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Ouvidoria Escolar</title>
+<title>Ouvidoria CETI José Marques</title>
 
 <style>
 body {
+  font-family: Arial;
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f0f4ff;
+  background: #f4f6f9;
 }
 
-/* HEADER */
 header {
-  background: #0b3d91;
+  background: linear-gradient(90deg, #2e7d32, #4a148c);
   color: white;
-  text-align: center;
   padding: 20px;
+  text-align: center;
 }
 
 header img {
-  width: 70px;
-  margin-bottom: 10px;
+  width: 90px;
+  display: block;
+  margin: 0 auto 10px;
 }
 
-/* MENU */
 nav {
+  background: #2e7d32;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  background: #072c6b;
 }
 
 nav button {
@@ -38,170 +36,171 @@ nav button {
   border: none;
   color: white;
   padding: 15px;
-  font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
+  font-weight: bold;
 }
 
 nav button:hover {
-  background: #0b3d91;
-}
-
-nav button.active {
-  background: white;
-  color: #0b3d91;
-  font-weight: bold;
-  border-radius: 10px 10px 0 0;
-}
-
-/* CONTEÚDO */
-.container {
-  max-width: 500px;
-  margin: auto;
-  padding: 15px;
+  background: #4a148c;
 }
 
 .section {
   display: none;
+  padding: 20px;
 }
 
-.section.active {
+.active {
   display: block;
 }
 
 .card {
   background: white;
   padding: 20px;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 15px auto;
+  max-width: 650px;
+  border-radius: 12px;
+  box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
 }
 
-/* FORM */
-input, textarea, select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+h2 {
+  color: #2e7d32;
 }
 
 button.enviar {
-  width: 100%;
-  padding: 12px;
-  background: #0b3d91;
+  background: #4a148c;
   color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
+  padding: 10px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
-/* OPINIÕES */
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  background: #e6ecff;
-  padding: 10px;
-  border-radius: 8px;
-  margin-top: 8px;
+textarea {
+  width: 100%;
+  height: 80px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 5px;
 }
 </style>
+
+<script>
+function mostrar(secao) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(secao).classList.add('active');
+}
+</script>
+
 </head>
 
 <body>
 
 <header>
   <img src="logo.png" alt="Logo da escola">
-  <h1>📢 Ouvidoria Escolar</h1>
+  <h1>Ouvidoria Estudantil</h1>
   <p>CETI José Marques</p>
 </header>
 
 <nav>
-  <button class="active" onclick="mostrar('inicio', this)">Início</button>
-  <button onclick="mostrar('formulario', this)">Formulário</button>
-  <button onclick="mostrar('opiniao', this)">Opiniões</button>
-  <button onclick="mostrar('mural', this)">Mural</button>
+  <button onclick="mostrar('inicio')">Início</button>
+  <button onclick="mostrar('opiniao')">Opiniões</button>
+  <button onclick="mostrar('infra')">Infraestrutura</button>
+  <button onclick="mostrar('alimentacao')">Alimentação</button>
+  <button onclick="mostrar('limpeza')">Limpeza</button>
+  <button onclick="mostrar('ensino')">Ensino</button>
+  <button onclick="mostrar('sugestoes')">Sugestões</button>
+  <button onclick="mostrar('mural')">Mural</button>
 </nav>
 
-<div class="container">
-
-  <!-- INÍCIO -->
-  <div id="inicio" class="section active">
-    <div class="card">
-      <h2>Bem-vindo</h2>
-      <p>Este espaço foi criado para ouvir os alunos. Aqui você pode dar sugestões, críticas e ajudar a melhorar a escola.</p>
-    </div>
+<!-- INÍCIO -->
+<div id="inicio" class="section active">
+  <div class="card">
+    <h2>Bem-vindo!</h2>
+    <p>Seu espaço para ser ouvido. Ajude a melhorar nossa escola.</p>
   </div>
-
-  <!-- FORMULÁRIO -->
-  <div id="formulario" class="section">
-    <div class="card">
-      <h2>Enviar Relato</h2>
-
-      <form>
-        <select>
-          <option>Sugestão</option>
-          <option>Reclamação</option>
-          <option>Elogio</option>
-        </select>
-
-        <textarea placeholder="Escreva aqui..."></textarea>
-
-        <button class="enviar">Enviar</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- OPINIÕES -->
-  <div id="opiniao" class="section">
-    <div class="card">
-      <h2>Opiniões</h2>
-
-      <input type="text" id="texto" placeholder="Digite sua opinião">
-      <button class="enviar" onclick="add()">Enviar</button>
-
-      <ul id="lista"></ul>
-    </div>
-  </div>
-
-  <!-- MURAL -->
-  <div id="mural" class="section">
-    <div class="card">
-      <h2>Mural</h2>
-      <p>📅 Prova sexta</p>
-      <p>🎉 Evento escolar</p>
-      <p>📢 Reunião do grêmio</p>
-    </div>
-  </div>
-
 </div>
 
-<script>
-function mostrar(secao, botao) {
-  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-  document.getElementById(secao).classList.add("active");
+<!-- OPINIÕES -->
+<div id="opiniao" class="section">
+  <div class="card">
+    <h2>Opiniões</h2>
+    <p>Você gosta da escola?</p>
+    <input type="radio"> Sim
+    <input type="radio"> Mais ou menos
+    <input type="radio"> Não
 
-  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-  botao.classList.add("active");
-}
+    <p>Comentário:</p>
+    <textarea></textarea><br><br>
+    <button class="enviar">Enviar</button>
+  </div>
+</div>
 
-function add() {
-  let texto = document.getElementById("texto").value;
+<!-- INFRA -->
+<div id="infra" class="section">
+  <div class="card">
+    <h2>Infraestrutura</h2>
+    <p>Os banheiros estão em boas condições?</p>
+    <input type="radio"> Sim
+    <input type="radio"> Não
+    <input type="radio"> Às vezes
+  </div>
+</div>
 
-  if (texto === "") return;
+<!-- ALIMENTAÇÃO -->
+<div id="alimentacao" class="section">
+  <div class="card">
+    <h2>Alimentação</h2>
+    <p>Você gosta da merenda?</p>
+    <input type="radio"> Sim
+    <input type="radio"> Não
 
-  let li = document.createElement("li");
-  li.textContent = texto;
+    <p>Sugestão:</p>
+    <textarea></textarea>
+  </div>
+</div>
 
-  document.getElementById("lista").appendChild(li);
-  document.getElementById("texto").value = "";
-}
-</script>
+<!-- LIMPEZA -->
+<div id="limpeza" class="section">
+  <div class="card">
+    <h2>Limpeza</h2>
+    <p>A escola é limpa?</p>
+    <input type="radio"> Sim
+    <input type="radio"> Não
+    <input type="radio"> Às vezes
+  </div>
+</div>
+
+<!-- ENSINO -->
+<div id="ensino" class="section">
+  <div class="card">
+    <h2>Ensino</h2>
+    <p>Os professores explicam bem?</p>
+    <input type="radio"> Sim
+    <input type="radio"> Não
+
+    <p>Comentário:</p>
+    <textarea></textarea>
+  </div>
+</div>
+
+<!-- SUGESTÕES -->
+<div id="sugestoes" class="section">
+  <div class="card">
+    <h2>Sugestões</h2>
+    <textarea placeholder="Escreva sua sugestão..."></textarea><br><br>
+    <button class="enviar">Enviar</button>
+  </div>
+</div>
+
+<!-- MURAL -->
+<div id="mural" class="section">
+  <div class="card">
+    <h2>Mural de Divulgação</h2>
+    <p>🏅 Olimpíada Escolar – 10/06</p>
+    <p>📅 Gincana Estudantil – Em breve</p>
+    <p>📚 Projeto de Leitura</p>
+  </div>
+</div>
 
 </body>
 </html>
