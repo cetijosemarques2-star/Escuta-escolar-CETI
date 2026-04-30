@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Ouvidoria CETI</title>
-
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
@@ -30,6 +22,7 @@ nav {
   background: #2e7d32;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 nav button {
@@ -38,6 +31,7 @@ nav button {
   color: white;
   padding: 15px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .section {
@@ -54,12 +48,23 @@ nav button {
   padding: 20px;
   margin: auto;
   max-width: 600px;
-  border-radius: 10px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-textarea {
+textarea, input[type="text"] {
   width: 100%;
-  height: 80px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+button {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
 }
 
 .chat-box {
@@ -68,136 +73,6 @@ textarea {
   background: #eee;
   padding: 10px;
   margin-bottom: 10px;
+  border-radius: 10px;
 }
 </style>
-
-<script>
-function abrir(secao) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(secao).classList.add('active');
-}
-</script>
-
-</head>
-
-<body>
-
-<header>
-  <img src="logo.png">
-  <h1>Ouvidoria Estudantil</h1>
-  <p>CETI José Marques</p>
-</header>
-
-<nav>
-  <button onclick="abrir('inicio')">Início</button>
-  <button onclick="abrir('formulario')">Questionário</button>
-  <button onclick="abrir('chat')">Chat</button>
-  <button onclick="abrir('mural')">Mural</button>
-</nav>
-
-<!-- INÍCIO -->
-<div id="inicio" class="section active">
-  <div class="card">
-    <h2>Bem-vindo</h2>
-    <p>Ajude a melhorar a escola com sua opinião.</p>
-  </div>
-</div>
-
-<!-- FORMULÁRIO -->
-<div id="formulario" class="section">
-  <div class="card">
-    <h2>Questionário</h2>
-
-    <p>Você gosta da escola?</p>
-    <input type="radio" name="q1"> Sim
-    <input type="radio" name="q1"> Não
-
-    <p>Os banheiros estão bons?</p>
-    <input type="radio" name="q2"> Sim
-    <input type="radio" name="q2"> Não
-
-    <p>Você gosta da merenda?</p>
-    <input type="radio" name="q3"> Sim
-    <input type="radio" name="q3"> Não
-
-    <p>A escola é limpa?</p>
-    <input type="radio" name="q4"> Sim
-    <input type="radio" name="q4"> Não
-
-    <p>Os professores explicam bem?</p>
-    <input type="radio" name="q5"> Sim
-    <input type="radio" name="q5"> Não
-
-    <p>Comentário geral:</p>
-    <textarea id="comentario"></textarea>
-
-    <br><br>
-    <button onclick="enviar()">Enviar</button>
-  </div>
-</div>
-
-<!-- CHAT -->
-<div id="chat" class="section">
-  <div class="card">
-    <h2>Chat dos Alunos</h2>
-
-    <div class="chat-box" id="chatBox"></div>
-
-    <input type="text" id="msg" placeholder="Digite sua mensagem">
-    <button onclick="enviarMsg()">Enviar</button>
-  </div>
-</div>
-
-<!-- MURAL -->
-<div id="mural" class="section">
-  <div class="card">
-    <h2>Mural</h2>
-    <p>🏅 Olimpíada Escolar</p>
-    <p>📅 Gincana em breve</p>
-  </div>
-</div>
-
-<script>
-// 🔥 COLE AQUI SUA CONFIG DO FIREBASE
-const firebaseConfig = {
-  // sua config aqui
-};
-
-// Inicializar
-const app = firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-// Enviar formulário
-function enviar() {
-  db.collection("respostas").add({
-    comentario: document.getElementById("comentario").value
-  });
-  alert("Enviado!");
-}
-
-// Enviar mensagem chat
-function enviarMsg() {
-  const msg = document.getElementById("msg").value;
-
-  db.collection("chat").add({
-    texto: msg,
-    data: new Date()
-  });
-
-  document.getElementById("msg").value = "";
-}
-
-// Atualizar chat em tempo real
-db.collection("chat").orderBy("data")
-.onSnapshot(snapshot => {
-  const chatBox = document.getElementById("chatBox");
-  chatBox.innerHTML = "";
-
-  snapshot.forEach(doc => {
-    chatBox.innerHTML += "<p>" + doc.data().texto + "</p>";
-  });
-});
-</script>
-
-</body>
-</html>
